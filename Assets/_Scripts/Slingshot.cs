@@ -72,7 +72,7 @@ public class Slingshot : MonoBehaviour{
         Instantiate<GameObject>(projLinePrefab, projectile.transform);
         projectile = null;
         MissionDemolition.ShotFired();                            
-        ProjectileLine.S.poi = projectile;                        
+        //ProjectileLine.S.poi = projectile;                        
 
     }
  }
