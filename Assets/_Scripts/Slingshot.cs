@@ -2,10 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum Projectile_type
+{
+   Normal,
+   Big
+}
+
 public class Slingshot : MonoBehaviour{
 
     [Header("Inscribed")]
     public GameObject projectilePrefab;
+    public GameObject big_projectile_prefab;
     public float velocityMult = 10f;
     public GameObject projLinePrefab;
 
@@ -14,6 +21,7 @@ public class Slingshot : MonoBehaviour{
     public Vector3 launchPos;
     public GameObject projectile;
     public bool aimingMode;
+    public Projectile_type current_type = Projectile_type.Normal;
 
     void Awake(){
         Transform launchPointTrans = transform.Find("LaunchPoint");
@@ -36,7 +44,13 @@ public class Slingshot : MonoBehaviour{
 
     aimingMode = true;
 
-    projectile = Instantiate(projectilePrefab) as GameObject;
+    if (current_type == Projectile_type.Normal) {
+         projectile = Instantiate(projectilePrefab) as GameObject;
+      }
+    else if (current_type == Projectile_type.Big)
+      {
+         projectile = Instantiate(big_projectile_prefab) as GameObject;
+      }
 
     projectile.transform.position = launchPos;
 
@@ -76,4 +90,14 @@ public class Slingshot : MonoBehaviour{
 
     }
  }
+
+ public void switch_to_normal_projectile()
+   {
+      current_type = Projectile_type.Normal;
+   }
+
+   public void switch_to_big_projectile()
+   {
+      current_type = Projectile_type.Big;
+   }
 }
